@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Philadelphia Animation Calendar</title>
   <meta name="description" content="A public calendar of animation, illustration, and visual arts events in Philadelphia." />
+
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #ffffff;
+      background: #fff;
       color: #111;
-      line-height: 1.5;
     }
 
     .container {
@@ -21,36 +20,31 @@
       padding: 48px 20px;
     }
 
-    header {
-      margin-bottom: 40px;
-    }
-
     h1 {
       font-size: 28px;
-      font-weight: 600;
-      margin: 0 0 8px 0;
+      margin-bottom: 6px;
     }
 
     .subtitle {
       color: #555;
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 6px;
     }
 
     .meta {
       color: #888;
       font-size: 13px;
+      margin-bottom: 24px;
     }
 
     .actions {
-      margin: 24px 0 40px 0;
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
     a.button {
-      display: inline-block;
       padding: 10px 14px;
       border: 1px solid #ddd;
       border-radius: 6px;
@@ -65,8 +59,8 @@
 
     h2 {
       font-size: 16px;
-      margin: 40px 0 16px;
-      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 12px;
     }
 
     .event {
@@ -74,21 +68,21 @@
       border-top: 1px solid #eee;
     }
 
-    .event-title {
+    .title {
       font-weight: 600;
-      font-size: 15px;
     }
 
-    .event-meta {
+    .meta-line {
       font-size: 13px;
       color: #666;
       margin-top: 2px;
     }
 
-    .event-desc {
+    .desc {
       font-size: 13px;
       color: #444;
       margin-top: 4px;
+      white-space: pre-wrap;
     }
 
     footer {
@@ -100,30 +94,39 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <header>
-      <h1>Philadelphia Animation Calendar</h1>
-      <div class="subtitle">A public calendar of animation, illustration, and visual arts events in Philadelphia.</div>
-      <div class="meta">Maintained by Rob Scales</div>
 
-      <div class="actions">
-        <a class="button" href="https://calendar.robscales.me/feed.ics">Subscribe to Calendar</a>
-        <a class="button" href="https://forms.gle/your-form-link">Submit an Event</a>
-      </div>
-    </header>
+    <h1>Philadelphia Animation Calendar</h1>
 
-    <h2>Upcoming Events</h2>
-
-    <div class="event">
-      <div class="event-title">No events yet</div>
-      <div class="event-meta">Check back soon or submit one above</div>
+    <div class="subtitle">
+      A public calendar of animation, illustration, and visual arts events in Philadelphia.
     </div>
 
+    <div class="meta">
+      Maintained by Rob Scales
+    </div>
+
+    <div class="actions">
+      <a class="button" href="https://calendar.google.com/calendar/embed?src=c21b50cbe54cfc926278e1811d43f7ce7fb975b6fbd829e70a9f5d69658a6f8f%40group.calendar.google.com&ctz=UTC">
+        Subscribe in Google Calendar
+      </a>
+      <a class="button" href="YOUR_GOOGLE_FORM_LINK">
+        Submit an Event
+      </a>
+    </div>
+
+    <h2>Upcoming Events</h2>
+    <div id="events">Loading events...</div>
+
     <footer>
-      Submit events via the form above · Subscribe via calendar feed<br/>
-      Maintained in Philadelphia
+      Subscribe via Google Calendar · Submit via form<br/>
+      Philadelphia, PA
     </footer>
+
   </div>
+
+  <script src="calendar.js"></script>
 </body>
 </html>
