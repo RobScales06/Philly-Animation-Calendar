@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyR1y1vkPkJDCSTW_WBcPxBifTm-BLmIrph7Wf8qZZPfOIkXCQuVjNBv1iNjiUkkGLc/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzeRfkkoIVrqDhyhezFlfxyGodDzDit1dANi3sdO7QuNJWp_ChTpxLS_wD-Jm46HPzg/exec";
 
 async function loadEvents() {
   try {
@@ -18,14 +18,18 @@ async function loadEvents() {
       const div = document.createElement("div");
       div.className = "event";
 
-      const start = event.start ? new Date(event.start).toLocaleString("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      }) : "";
+      const start = event.start
+        ? new Date(event.start).toLocaleString("en-US", {
+            dateStyle: "medium",
+            timeStyle: "short"
+          })
+        : "";
 
-      const end = event.end ? new Date(event.end).toLocaleString("en-US", {
-        timeStyle: "short"
-      }) : "";
+      const end = event.end
+        ? new Date(event.end).toLocaleTimeString("en-US", {
+            timeStyle: "short"
+          })
+        : "";
 
       div.innerHTML = `
         <div class="title">${escapeHtml(event.title || "Untitled Event")}</div>
@@ -46,7 +50,6 @@ async function loadEvents() {
   }
 }
 
-// prevent HTML injection issues
 function escapeHtml(str) {
   return str.replace(/[&<>"']/g, m => ({
     "&": "&amp;",
