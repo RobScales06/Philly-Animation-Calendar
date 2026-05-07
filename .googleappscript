@@ -1,0 +1,87 @@
+const CALENDAR_ID = "c21b50cbe54cfc926278e1811d43f7ce7fb975b6fbd829e70a9f5d69658a6f8f@group.calendar.google.com";
+
+function handleEdit(e) {
+  try {
+    Logger.log("Trigger fired");
+
+    const sheet = e.source.getActiveSheet();
+    const range = e.range;
+
+    const row = range.getRow();
+    const col = range.getColumn();
+
+    Logger.log("Row: " + row + " Col: " + col);
+    Logger.log("Value: " + e.value);
+
+    const APPROVED_COL = 9;
+
+    if (col !== APPROVED_COL) return;
+    if (e.value !== "TRUE" && e.value !== true) return;
+
+    const data = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+    Logger.log(JSON.stringify(data));
+
+    const title = data[1];
+    const date = data[2];
+    const start = data[3];
+    const end = data[4];
+    const location = data[5];
+    const description = data[6];
+    const link = data[7];
+
+    const startDate = parseDateTime(date, start);
+const endDate = end
+  ? parseDateTime(date, end)
+  : new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+
+    Logger.log("Start: " + startDate);
+    Logger.log("End: " + endDate);
+
+    const calendar = CalendarApp.getDefaultCalendar();
+
+    calendar.createEvent(title, startDate, endDate, {
+      location: location || "",
+      description: `${description || ""}\n\n${link || ""}`
+    });
+
+    sheet.getRange(row, 10).setValue("APPROVED");
+
+    Logger.log("Event created");
+
+  } catch (err) {
+    Logger.log("ERROR: " + err);
+    throw err;
+  }
+}
+
+function parseDateTime(date, timeStr) {
+  const dateObj = new Date(date + " 00:00:00");
+
+  const match = timeStr.match(/(\d+):(\d+):?\d*\s*(AM|PM)/i);
+  if (!match) return dateObj;
+
+  let [_, hours, minutes, meridian] = match;
+
+  hours = parseInt(hours);
+  minutes = parseInt(minutes);
+
+  if (meridian.toUpperCase() === "PM" && hours < 12) hours += 12;
+  if (meridian.toUpperCase() === "AM" && hours === 12) hours = 0;
+
+  dateObj.setHours(hours);
+  dateObj.setMinutes(minutes);
+  dateObj.setSeconds(0);
+
+  return dateObj;
+}
+
+function convertTime(timeStr) {
+  const [time, modifier] = timeStr.split(" ");
+  let [hours, minutes] = time.split(":").map(Number);
+
+  if (modifier === "PM" && hours < 12) hours += 12;
+  if (modifier === "AM" && hours === 12) hours = 0;
+
+  return [hours, minutes || 0];
+}
