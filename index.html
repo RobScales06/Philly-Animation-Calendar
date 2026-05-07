@@ -40,7 +40,70 @@
       font-size: 14px;
     }
 
+    a.button-event {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      text-decoration: none;
+      background-color: #b4e6ff;
+      color: #111;
+      font-size: 15px;
+    }
+
+    a.button-ics {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      text-decoration: none;
+      background-color: #fcfdf6;
+      color: #111;
+      font-size: 14px;
+    }
+
+    a.button-thoughts {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      text-decoration: none;
+      background-color: #fcfaff;
+      color: #111;
+      font-size: 14px;
+    }
+
+    a.button-support {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      text-decoration: none;
+      background-color: #fffbfa;
+      color: #111;
+      font-size: 14px;
+    }
+
     a.button:hover { border-color: #999; }
+    a.button-event:hover { border-color: #999; }
+    a.button-thoughts:hover { border-color: #999; }
+    a.button-ics:hover { border-color: #999; }
+    a.button-support:hover { border-color: #999; }
+    
+    .desc {
+  font-size: 13px;
+  color: #444;
+  margin-top: 4px;
+  white-space: pre-wrap;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+.desc.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
 
     h2 { font-size: 16px; margin-top: 40px; margin-bottom: 12px; }
 
@@ -88,13 +151,16 @@
     </div>
 
     <div class="actions">
-      <a class="button" href="https://calendar.google.com/calendar/embed?src=c21b50cbe54cfc926278e1811d43f7ce7fb975b6fbd829e70a9f5d69658a6f8f%40group.calendar.google.com">
-        Subscribe in Google Calendar
-      </a>
-      <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSetKWJwn1Nh8yfm4Wu6NFmzlwjhy8Ify4-5rKvx4lrngvdqOA/viewform?usp=header">
+        <a class="button-event" href="https://docs.google.com/forms/d/e/1FAIpQLSetKWJwn1Nh8yfm4Wu6NFmzlwjhy8Ify4-5rKvx4lrngvdqOA/viewform?usp=header">
         Submit an Event
       </a>
-      <a class="button" href="https://ko-fi.com/robscales" target="_blank" rel="noopener noreferrer">
+      <a class="button-ics" href="https://calendar.google.com/calendar/embed?src=c21b50cbe54cfc926278e1811d43f7ce7fb975b6fbd829e70a9f5d69658a6f8f%40group.calendar.google.com">
+        Subscribe in Google Calendar
+      </a>
+      <a class="button-thoughts" href="https://docs.google.com/forms/d/e/1FAIpQLSeHIjphTT0gpIpazKvfh4FElGp0t4V4Z1iGlY2AtXLFVCMqNQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+        Share Thoughts
+    </a>
+      <a class="button-support" href="https://ko-fi.com/robscales" target="_blank" rel="noopener noreferrer">
         Support This Project
     </a>
     </div>

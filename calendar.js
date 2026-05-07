@@ -1,5 +1,12 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzeRfkkoIVrqDhyhezFlfxyGodDzDit1dANi3sdO7QuNJWp_ChTpxLS_wD-Jm46HPzg/exec";
 
+document.getElementById("events").addEventListener("click", (e) => {
+  const desc = e.target.closest(".desc");
+  if (!desc) return;
+
+  desc.classList.toggle("expanded");
+});
+
 async function loadEvents() {
   try {
     const res = await fetch(API_URL);
@@ -41,6 +48,7 @@ async function loadEvents() {
       `;
 
       container.appendChild(div);
+        
     });
 
   } catch (err) {
