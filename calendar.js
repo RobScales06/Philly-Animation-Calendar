@@ -48,6 +48,13 @@ async function loadEvents() {
       `;
 
       container.appendChild(div);
+
+      // Add JSON-LD structured data for SEO
+      const eventSchema = createEventSchema(event);
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(eventSchema);
+      document.head.appendChild(script);
         
     });
 
@@ -66,6 +73,46 @@ function escapeHtml(str) {
     '"': "&quot;",
     "'": "&#039;"
   }[m]));
+}
+
+function createEventSchema(event) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.title || "Untitled Event",
+    "description": event.description || ""
+  };
+
+  // Add start and end dates in ISO 8601 format
+  if (event.start) {
+    schema.startDate = new Date(event.start).toISOString();
+  }
+
+  if (event.end) {
+    schema.endDate = new Date(event.end).toISOString();
+  }
+
+  // Add location if provided
+  if (event.location) {
+    schema.location = {
+      "@type": "Place",
+      "name": event.location,
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      }
+    };
+  }
+
+  // Add organizer if available
+  if (event.organizer) {
+    schema.organizer = {
+      "@type": "Organization",
+      "name": event.organizer
+    };
+  }
+
+  return schema;
 }
 
 loadEvents();
